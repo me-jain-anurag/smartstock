@@ -12,3 +12,24 @@ pydantic==2.12.5
 pytest==9.0.2
 kaggle==2.0.0
 jupyter==1.1.1
+
+# Property-based testing
+hypothesis==6.109.0
+pytest-cov==5.0.0
+pytest-asyncio==0.24.0
+
+# FastAPI extras
+python-multipart==0.0.9
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# Development tools
+pre-commit==3.7.1
+black==24.10.0
+isort==5.13.2
+flake8==1.7.0
+mypy==1.11.2
+
+# Additional ML/Data dependencies
+scipy==1.14.1
+numpy==1.26.4
