@@ -30,6 +30,7 @@ Thumbs.db
 # IDE
 .vscode/settings.json
 .idea/
+.kiro/
 
 # Docker
 *.log
