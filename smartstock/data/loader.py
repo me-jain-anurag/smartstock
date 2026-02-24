@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def load_raw(path: str) -> pd.DataFrame:
     """
     Load raw CSV dataset from the path.
@@ -12,6 +13,7 @@ def load_raw(path: str) -> pd.DataFrame:
     """
     df = pd.read_csv(path, parse_dates=["date"])
     return df
+
 
 def filter_series(df: pd.DataFrame, store_id: int, item_id: int) -> pd.DataFrame:
     """

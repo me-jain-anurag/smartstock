@@ -1,8 +1,9 @@
-from smartstock.data.loader import load_raw, filter_series
 from smartstock.data.cleaner import clean_series
 from smartstock.data.features import add_time_features
+from smartstock.data.loader import filter_series, load_raw
 
-def run_pipeline():
+
+def run_pipeline() -> None:
     print("Loading raw data...")
     df = load_raw("data/raw/train.csv")
 
@@ -21,6 +22,7 @@ def run_pipeline():
     print("\nColumns:", final.columns.tolist())
     print("Shape:", final.shape)
     print("---Done---")
+
 
 if __name__ == "__main__":
     run_pipeline()

@@ -1,13 +1,15 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
+
 from smartstock.models.base import BaseForecaster
+
 
 class NaiveForecaster(BaseForecaster):
     """
     Naive baseline model: "The future is the same as the last seen value."
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.last_value = None
         self.last_date = None
 
@@ -18,7 +20,7 @@ class NaiveForecaster(BaseForecaster):
         if df.empty:
             raise ValueError("Training data is empty.")
 
-        self.last_value = df['sales'].iloc[-1]
+        self.last_value = df["sales"].iloc[-1]
         self.last_date = df.index[-1]
 
     def predict(self, periods: int) -> pd.DataFrame:
@@ -29,13 +31,11 @@ class NaiveForecaster(BaseForecaster):
             raise RuntimeError("Model must be fitting before calling predict().")
 
         forecast_dates = pd.date_range(
-            start=self.last_date + pd.Timedelta(days=1),
-            periods=periods,
-            freq='D'
+            start=self.last_date + pd.Timedelta(days=1), periods=periods, freq="D"
         )
 
-        forecast_df = pd.DataFrame({
-            'forecast': np.full(periods, self.last_value)
-        }, index=forecast_dates)
+        forecast_df = pd.DataFrame(
+            {"forecast": np.full(periods, self.last_value)}, index=forecast_dates
+        )
 
         return forecast_df
