@@ -39,3 +39,10 @@ docker-compose.override.yml
 # Distribution / packaging
 *.tar.gz
 *.zip
+
+# Testing / coverage
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+.hypothesis/
