@@ -15,7 +15,7 @@ class BaseForecaster(ABC):
         Train the model on the provided DataFrame.
         Expected format: Date as index, 'sales' as column
         """
-        pass
+        pass  # pragma: no cover
 
     @abstractmethod
     def predict(self, periods: int) -> pd.DataFrame:
@@ -23,4 +23,4 @@ class BaseForecaster(ABC):
         Predict the next 'periods' days of sales.
         Returns: DataFrame with Date Index and 'forecast' column
         """
-        pass
+        pass  # pragma: no cover
