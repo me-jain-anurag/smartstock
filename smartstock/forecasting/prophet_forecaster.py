@@ -54,6 +54,9 @@ class ProphetForecaster(BaseForecaster):
             interval_width=0.8,
             # Include uncertainty in seasonality
             uncertainty_samples=1000,
+            # Force yearly and daily seasonality for consistency in testing
+            yearly_seasonality=True,
+            daily_seasonality=True,
         )
 
         self.fitted: bool = False
@@ -65,10 +68,13 @@ class ProphetForecaster(BaseForecaster):
             raise ValueError("Training data cannot be empty")
 
         if "sales" not in df.columns:
-            raise ValueError("DataFrame must contain sales column")
+            raise ValueError("DataFrame must contain 'sales' column")
 
+        # Reset index to convert DatetimeIndex to column
         prophet_df = df.reset_index()
-        prophet_df = prophet_df.rename(columns={df.index.name: "ds", "sales": "y"})
+
+        index_col_name = prophet_df.columns[0]  # First column after reset is the index
+        prophet_df = prophet_df.rename(columns={index_col_name: "ds", "sales": "y"})
 
         prophet_df["ds"] = pd.to_datetime(prophet_df["ds"])
 
@@ -168,8 +174,15 @@ class ProphetForecaster(BaseForecaster):
 
         forecast = self.model.predict(future)
 
-        components = forecast[["ds", "trend", "yearly", "weekly", "daily"]].copy()
+        # Start with required columns
+        components = forecast[["ds", "trend"]].copy()
 
+        # Add seasonality components if they exist
+        for col in ["yearly", "weekly", "daily"]:
+            if col in forecast.columns:
+                components[col] = forecast[col]
+
+        # Add holidays if they exist
         if "holidays" in forecast.columns:
             components["holidays"] = forecast["holidays"]
 
