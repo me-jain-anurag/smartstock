@@ -1,5 +1,6 @@
 from typing import Optional, Tuple
 
+import numpy as np
 import pandas as pd
 from statsmodels.tsa.statespace.sarimax import SARIMAX, SARIMAXResults
 
@@ -88,35 +89,66 @@ class SARIMAForecaster(BaseForecaster):
             raise RuntimeError("Model must be fitted before prediction")
 
         if self.training_data is None:
-            raise RuntimeError("Training data is not available")
+            raise RuntimeError("Training data not available")
 
         if self.result is None:
             raise RuntimeError("Model results not available")
 
-        forecast_result = self.result.get_forecast(steps=periods)
+        if periods < 0:
+            raise ValueError("Periods must be non-negative")
 
+        # Handle edge case: periods = 0
+        if periods == 0:
+            if not include_history:
+                return pd.DataFrame(
+                    columns=["forecast", "ci_lower", "ci_upper"],
+                    index=pd.DatetimeIndex([]),
+                )
+
+            # Return only historical fitted values
+            history_df = pd.DataFrame(
+                {"forecast": self.result.fittedvalues}, index=self.training_data.index
+            )
+
+            if include_confidence:
+                # SARIMA doesn't provide CI for historical fitted values
+                history_df["ci_lower"] = np.nan
+                history_df["ci_upper"] = np.nan
+
+            return history_df
+
+        # Get forecast for future periods
+        forecast_result = self.result.get_forecast(steps=periods)
         last_date = self.training_data.index[-1]
-        forecast_dates = pd.date_range(
+        future_dates = pd.date_range(
             start=last_date + pd.Timedelta(days=1), periods=periods, freq="D"
         )
 
-        result_df = pd.DataFrame(
-            {"forecast": forecast_result.predicted_mean}, index=forecast_dates
+        # Create DataFrame for future predictions
+        future_df = pd.DataFrame(
+            {"forecast": forecast_result.predicted_mean}, index=future_dates
         )
 
         if include_confidence:
-            confidence_int = forecast_result.conf_int()
-            result_df["ci_lower"] = confidence_int.iloc[:, 0]
-            result_df["ci_upper"] = confidence_int.iloc[:, 1]
+            conf_int = forecast_result.conf_int()
+            future_df["ci_lower"] = conf_int.iloc[:, 0]
+            future_df["ci_upper"] = conf_int.iloc[:, 1]
 
-        if include_history:
-            fitted_values = self.result.fittedvalues
-            history_df = pd.DataFrame(
-                {"forecast": fitted_values}, index=self.training_data.index
-            )
+        if not include_history:
+            return future_df
 
-            result_df = pd.concat([history_df, result_df])
+        # Include historical fitted values if requested
+        history_df = pd.DataFrame(
+            {"forecast": self.result.fittedvalues}, index=self.training_data.index
+        )
 
+        if include_confidence:
+            # SARIMA doesn't provide confidence intervals for historical fitted values
+            history_df["ci_lower"] = np.nan
+            history_df["ci_upper"] = np.nan
+
+        # Combine history and future predictions
+        result_df = pd.concat([history_df, future_df])
         return result_df
 
     def get_model_summary(self) -> str:
