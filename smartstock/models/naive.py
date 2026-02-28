@@ -23,7 +23,7 @@ class NaiveForecaster(BaseForecaster):
         self.last_value = df["sales"].iloc[-1]
         self.last_date = df.index[-1]
 
-    def predict(self, periods: int) -> pd.DataFrame:
+    def predict(self, periods: int, include_history: bool = True) -> pd.DataFrame:
         """
         Creates a flat forecast by repeating the last value.
         """
