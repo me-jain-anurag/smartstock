@@ -86,7 +86,7 @@ This document maintains a comprehensive, cited reference list for all external t
   Hypothesis naturally shrinks real-world failing inputs to their minimal reproducing case, making optimization logic incredibly resilient.
 
 - **Primary Paper:** MacIver, D.R., Hatfield-Dodds, Z., et al. (2019). Hypothesis: A new approach to property-based testing. _Journal of Open Source Software_, 4(43), 1891. https://doi.org/10.21105/joss.01891
-- **Empirical evaluation:** Coblenz, M., et al. (2025). An empirical evaluation of property-based testing in Python. _Proceedings of the ACM on Programming Languages_, 9(OOPSLA2), Article 412. https://doi.org/10.1145/3764068
+- **Empirical evaluation:** Ravi, S., & Coblenz, M. (2025). An empirical evaluation of property-based testing in Python. _Proceedings of the ACM on Programming Languages_, 9(OOPSLA2), Article 412. https://doi.org/10.1145/3764068
 
 ---
 
@@ -224,6 +224,6 @@ SmartStock is built around the **Kaggle Store Item Demand Forecasting Challenge*
 | Arunraj et al.           | 2016 | Retail SARIMA application and use of external variables               |
 | Lee, Padmanabhan & Whang | 1997 | Foundational theory behind safety stock design and Bullwhip           |
 | MacIver et al.           | 2019 | Justification for Hypothesis use in test suite                        |
-| Coblenz et al.           | 2025 | Quantitative evidence that PBT finds 50× more bugs than unit tests    |
+| Ravi & Coblenz           | 2025 | Quantitative evidence that PBT finds 50× more bugs than unit tests    |
 | Harris et al.            | 2020 | Vectorized numpy performance and metric computation                   |
 | Hyndman & Koehler        | 2006 | Theoretical grounding for MAE, RMSE, MAPE, R²                         |
