@@ -58,7 +58,7 @@ def test_naive_forecaster_predict_without_fit() -> None:
     model = NaiveForecaster()
 
     with pytest.raises(
-        RuntimeError, match="Model must be fitting before calling predict"
+        RuntimeError, match="Model must be fitted before calling predict"
     ):
         model.predict(5)
 

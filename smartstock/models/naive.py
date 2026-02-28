@@ -28,7 +28,7 @@ class NaiveForecaster(BaseForecaster):
         Creates a flat forecast by repeating the last value.
         """
         if self.last_value is None:
-            raise RuntimeError("Model must be fitting before calling predict().")
+            raise RuntimeError("Model must be fitted before calling predict().")
 
         forecast_dates = pd.date_range(
             start=self.last_date + pd.Timedelta(days=1), periods=periods, freq="D"

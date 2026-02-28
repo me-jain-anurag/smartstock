@@ -17,7 +17,7 @@ class SARIMAForecaster(BaseForecaster):
         (p, d, q) where:
         - p: AR order (number of lag observations)
         - d: I order (degree of differencing)
-        - q: MA order (aize of moving average window)
+        - q: MA order (size of moving average window)
     seasonal order : Tuple[int, int, int, int]
         (P, D, Q, s) where:
         - P: Seasonal AR order
