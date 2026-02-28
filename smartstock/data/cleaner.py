@@ -17,6 +17,14 @@ def clean_series(df: pd.DataFrame) -> pd.DataFrame:
     cleaned["sales"] = cleaned["sales"].clip(lower=0)
     cleaned["sales"] = cleaned["sales"].interpolate(method="linear")
 
+    # .asfreq() introduces NaNs. Ensure interpolation handled them all
+    assert (
+        not cleaned["sales"].isna().any()
+    ), "NaNs exist after interpolation (likely missing leading data)"
+
+    # Double-clip out any negatives created by extreme slopes during interpolation
+    cleaned["sales"] = cleaned["sales"].clip(lower=0)
+
     q1 = cleaned["sales"].quantile(0.25)
     q3 = cleaned["sales"].quantile(0.75)
     iqr = q3 - q1
