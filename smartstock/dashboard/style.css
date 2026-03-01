@@ -1,0 +1,486 @@
+/* ============================================================
+   SmartStock Dashboard — Global Theme
+   Dark mode · Silver/chrome accents · Alice headings · Space Grotesk body
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Alice&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/material-icons@1.13.14/iconfont/material-icons.min.css');
+
+/* ── CSS Variables ──────────────────────────────────────────── */
+:root {
+    --bg: #0d0d0f;
+    --surface: #16181d;
+    --surface-2: #1e2027;
+    --border: #2a2d35;
+    --border-light: #363a45;
+
+    --accent: #c0c8d4;
+    --accent-muted: #8a94a6;
+    --accent-dim: #4a5162;
+
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --error: #f87171;
+    --info: #60a5fa;
+
+    --text-primary: #e8eaf0;
+    --text-secondary: #9aa0b0;
+    --text-muted: #636878;
+
+    --font-heading: 'Alice', Georgia, serif;
+    --font-body: 'Space Grotesk', system-ui, sans-serif;
+
+    --radius: 8px;
+    --radius-lg: 14px;
+    --transition: 0.2s ease;
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+html,
+body,
+[data-testid="stAppViewContainer"] {
+    background-color: var(--bg) !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-body) !important;
+}
+
+/* ── Streamlit Chrome ───────────────────────────────────────── */
+[data-testid="stHeader"],
+[data-testid="stToolbar"],
+[data-testid="stDecoration"] {
+    background-color: var(--bg) !important;
+    border-bottom: 1px solid var(--border) !important;
+}
+
+[data-testid="stSidebar"] {
+    background-color: var(--surface) !important;
+    border-right: 1px solid var(--border) !important;
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--text-primary) !important;
+    font-family: var(--font-body) !important;
+}
+
+/* ── Typography ─────────────────────────────────────────────── */
+h1,
+h2,
+h3,
+.ss-heading {
+    font-family: var(--font-heading) !important;
+    color: var(--text-primary) !important;
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: 2.2rem !important;
+    font-weight: 400 !important;
+}
+
+h2 {
+    font-size: 1.5rem !important;
+    font-weight: 400 !important;
+}
+
+h3 {
+    font-size: 1.15rem !important;
+    font-weight: 400 !important;
+}
+
+p,
+li,
+span,
+label,
+.stMarkdown p {
+    font-family: var(--font-body) !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.65 !important;
+}
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.ss-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem 1.75rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.ss-card:hover {
+    border-color: var(--accent-dim);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Metric Cards ───────────────────────────────────────────── */
+.ss-metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    text-align: center;
+    transition: border-color var(--transition);
+}
+
+.ss-metric:hover {
+    border-color: var(--accent-muted);
+}
+
+.ss-metric-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-muted) !important;
+    margin-bottom: 0.35rem;
+}
+
+.ss-metric-value {
+    font-family: var(--font-body) !important;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--accent) !important;
+}
+
+/* ── Feature Cards (Home page) ──────────────────────────────── */
+.ss-feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    text-align: center;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+    cursor: default;
+}
+
+.ss-feature-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(192, 200, 212, 0.08);
+}
+
+.ss-feature-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.ss-feature-title {
+    font-family: var(--font-heading) !important;
+    font-size: 1.1rem !important;
+    color: var(--text-primary) !important;
+    margin-bottom: 0.5rem;
+}
+
+.ss-feature-desc {
+    font-size: 0.875rem !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.5 !important;
+}
+
+/* ── Status Badges ──────────────────────────────────────────── */
+.ss-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.ss-badge-success {
+    background: rgba(74, 222, 128, 0.12);
+    color: var(--success) !important;
+    border: 1px solid rgba(74, 222, 128, 0.25);
+}
+
+.ss-badge-warning {
+    background: rgba(251, 191, 36, 0.12);
+    color: var(--warning) !important;
+    border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.ss-badge-error {
+    background: rgba(248, 113, 113, 0.12);
+    color: var(--error) !important;
+    border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+.ss-badge-info {
+    background: rgba(96, 165, 250, 0.12);
+    color: var(--info) !important;
+    border: 1px solid rgba(96, 165, 250, 0.25);
+}
+
+.ss-badge-muted {
+    background: rgba(138, 148, 166, 0.12);
+    color: var(--accent-muted) !important;
+    border: 1px solid var(--border);
+}
+
+/* ── Alert / Banner Boxes ───────────────────────────────────── */
+.ss-alert {
+    border-radius: var(--radius);
+    padding: 0.9rem 1.1rem;
+    margin: 0.75rem 0;
+    font-size: 0.875rem;
+    border-left: 3px solid;
+}
+
+.ss-alert-warning {
+    background: rgba(251, 191, 36, 0.08);
+    border-color: var(--warning);
+    color: var(--warning) !important;
+}
+
+.ss-alert-error {
+    background: rgba(248, 113, 113, 0.08);
+    border-color: var(--error);
+    color: var(--error) !important;
+}
+
+.ss-alert-success {
+    background: rgba(74, 222, 128, 0.08);
+    border-color: var(--success);
+    color: var(--success) !important;
+}
+
+.ss-alert-info {
+    background: rgba(96, 165, 250, 0.08);
+    border-color: var(--info);
+    color: var(--info) !important;
+}
+
+/* ── Dividers ───────────────────────────────────────────────── */
+.ss-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+}
+
+/* ── Tech Badges ────────────────────────────────────────────── */
+.ss-tech-badge {
+    display: inline-block;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.3rem 0.75rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--accent-muted) !important;
+    margin: 0.2rem;
+    transition: border-color var(--transition), color var(--transition);
+}
+
+.ss-tech-badge:hover {
+    border-color: var(--accent);
+    color: var(--accent) !important;
+}
+
+/* ── Streamlit Widget Overrides ─────────────────────────────── */
+div[data-testid="stSelectbox"]>div>div,
+div[data-testid="stNumberInput"] input,
+div[data-testid="stTextInput"] input {
+    background-color: var(--surface-2) !important;
+    border-color: var(--border) !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-body) !important;
+    border-radius: var(--radius) !important;
+}
+
+/* Slider accent */
+[data-testid="stSlider"] [data-baseweb="slider"] [role="slider"] {
+    background-color: var(--accent) !important;
+}
+
+/* Tabs */
+[data-testid="stTabs"] [role="tablist"] {
+    border-bottom: 1px solid var(--border) !important;
+    background: transparent !important;
+}
+
+[data-testid="stTabs"] [role="tab"] {
+    font-family: var(--font-body) !important;
+    color: var(--text-secondary) !important;
+}
+
+[data-testid="stTabs"] [role="tab"][aria-selected="true"] {
+    color: var(--accent) !important;
+    border-bottom-color: var(--accent) !important;
+}
+
+/* Buttons */
+.stButton>button {
+    background: var(--surface-2) !important;
+    border: 1px solid var(--border-light) !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-body) !important;
+    border-radius: var(--radius) !important;
+    transition: border-color var(--transition), background var(--transition) !important;
+}
+
+.stButton>button:hover {
+    border-color: var(--accent) !important;
+    background: rgba(192, 200, 212, 0.07) !important;
+}
+
+/* Download button */
+[data-testid="stDownloadButton"]>button {
+    background: rgba(192, 200, 212, 0.08) !important;
+    border: 1px solid var(--accent-dim) !important;
+    color: var(--accent) !important;
+    font-family: var(--font-body) !important;
+    border-radius: var(--radius) !important;
+}
+
+/* File uploader */
+[data-testid="stFileUploader"] {
+    background: var(--surface) !important;
+    border: 1px dashed var(--border-light) !important;
+    border-radius: var(--radius-lg) !important;
+    transition: border-color var(--transition) !important;
+}
+
+[data-testid="stFileUploader"]:hover {
+    border-color: var(--accent-muted) !important;
+}
+
+/* DataFrames */
+[data-testid="stDataFrame"] {
+    background: var(--surface) !important;
+}
+
+/* Expander */
+[data-testid="stExpander"] {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+}
+
+[data-testid="stExpander"] summary {
+    font-family: var(--font-body) !important;
+    color: var(--text-primary) !important;
+}
+
+/* Metrics */
+[data-testid="stMetric"] {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    padding: 0.75rem 1rem !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--accent-muted) !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--accent) !important;
+    font-family: var(--font-body) !important;
+    font-size: 1.5rem !important;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-light);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dim);
+}
+
+/* ── Sidebar Nav links ──────────────────────────────────────── */
+[data-testid="stSidebarNav"] a {
+    font-family: var(--font-body) !important;
+    color: var(--text-secondary) !important;
+    border-radius: var(--radius) !important;
+    transition: background var(--transition), color var(--transition) !important;
+}
+
+[data-testid="stSidebarNav"] a:hover,
+[data-testid="stSidebarNav"] a[aria-current="page"] {
+    background: rgba(192, 200, 212, 0.07) !important;
+    color: var(--accent) !important;
+}
+
+/* ── Hero section ───────────────────────────────────────────── */
+.ss-hero {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+}
+
+.ss-hero-title {
+    font-family: var(--font-heading) !important;
+    font-size: 3rem !important;
+    font-weight: 400 !important;
+    color: var(--accent) !important;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.ss-hero-subtitle {
+    font-family: var(--font-body) !important;
+    font-size: 1.1rem !important;
+    color: var(--text-secondary) !important;
+    font-weight: 300 !important;
+}
+
+/* ── Section Headers ────────────────────────────────────────── */
+.ss-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+}
+
+.ss-section-header h2 {
+    margin: 0 !important;
+    font-size: 1.15rem !important;
+    color: var(--text-primary) !important;
+}
+
+/* ── ABC Category Colors ────────────────────────────────────── */
+.abc-a {
+    color: #fbbf24 !important;
+    font-weight: 600;
+}
+
+/* gold */
+.abc-b {
+    color: #c0c8d4 !important;
+    font-weight: 600;
+}
+
+/* silver */
+.abc-c {
+    color: #636878 !important;
+}
+
+/* muted */
+
+/* ── Sidebar collapse/expand button ────────────────────────── */
+/* 'keyboard_double_arrow_left' appears as text when Material Icons font
+   cannot load. Hide the button entirely — $= 'ends with' covers
+   both old Streamlit ('collapsedControl') and new ('stSidebarCollapsedControl') */
+[data-testid$="collapsedControl"],
+[data-testid$="CollapsedControl"],
+[data-testid="stSidebarNavSeparator"]~button {
+    display: none !important;
+}
