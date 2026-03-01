@@ -46,3 +46,6 @@ htmlcov/
 .coverage
 coverage.xml
 .hypothesis/
+
+# Dev notes — private, not for version control
+dev-notes/
