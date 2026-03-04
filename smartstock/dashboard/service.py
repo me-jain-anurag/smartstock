@@ -13,7 +13,6 @@ import io
 from dataclasses import dataclass, field
 from typing import Any
 
-import numpy as np
 import pandas as pd
 
 # ── Column alias map (fuzzy detection) ──────────────────────────────────────
@@ -284,7 +283,11 @@ def _normalise_forecast(
         df = df.rename(columns={"sales": "forecast"})
     for col in ("ci_lower", "ci_upper"):
         if col not in df.columns:
-            df[col] = df.get("forecast", np.nan)
+            df[col] = df["forecast"]
+        else:
+            # SARIMA returns NaN CIs for the historical fitted portion —
+            # fill those NaNs with the point forecast so the band renders cleanly
+            df[col] = df[col].fillna(df["forecast"])
 
     return df[["forecast", "ci_lower", "ci_upper"]]
 
