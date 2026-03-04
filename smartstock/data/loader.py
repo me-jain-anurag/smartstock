@@ -28,5 +28,5 @@ def filter_series(df: pd.DataFrame, store_id: int, item_id: int) -> pd.DataFrame
         A DataFrame with columns: date, sales
     """
     mask = (df["store"] == store_id) & (df["item"] == item_id)
-    series = df[mask].sort_values("date").set_index("date")
+    series = df[mask].sort_values("date").set_index("date")[["sales"]]
     return series
