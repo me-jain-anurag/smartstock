@@ -28,7 +28,7 @@ class SARIMAForecaster(BaseForecaster):
 
     def __init__(
         self,
-        order: Tuple[int, int, int] = (1, 1, 1),
+        order: Tuple[int, int, int] = (1, 0, 1),
         seasonal_order: Tuple[int, int, int, int] = (1, 1, 1, 7),
     ) -> None:
         """Initialize SARIMA model with specified parameters."""
