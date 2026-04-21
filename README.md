@@ -3,6 +3,7 @@
 SmartStock is an AI-assisted inventory planning project that combines demand forecasting with inventory optimization.
 
 It provides:
+
 - **Demand forecasting** (Prophet, SARIMA, and Naive baseline)
 - **EOQ optimization** with safety stock and reorder point calculations
 - **ABC analysis** for product prioritization
@@ -45,12 +46,60 @@ pip install -r requirements.txt
 pip install pytest pytest-cov hypothesis pre-commit black isort flake8 mypy
 ```
 
+## Quick start (Windows)
+
+From the repository root:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+Run the app:
+
+```bash
+python -m streamlit run smartstock/dashboard/app.py
+```
+
+Optional checks:
+
+```bash
+python -m pytest -q
+python sanity_check.py
+```
+
+## Quick start (Linux)
+
+From the repository root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+Run the app:
+
+```bash
+python -m streamlit run smartstock/dashboard/app.py
+```
+
+Optional checks:
+
+```bash
+python -m pytest -q
+python sanity_check.py
+```
+
 ## Run the dashboard
 
 From the repository root:
 
 ```bash
-streamlit run smartstock/dashboard/app.py
+python -m streamlit run smartstock/dashboard/app.py
 ```
 
 Then open the local URL shown in the terminal.
@@ -64,6 +113,7 @@ python scripts/generate_sample_data.py
 ```
 
 This creates files under `data/raw/`, including:
+
 - `sample_quick.csv` (small, fast to test)
 - `sample_test.csv` (larger scale dataset)
 - `sample_abc.csv` (ABC analysis schema)
@@ -71,14 +121,18 @@ This creates files under `data/raw/`, including:
 ## Data schemas
 
 ### Forecasting/EOQ workflow CSV
+
 Required columns:
+
 - `date`
 - `store`
 - `item`
 - `sales`
 
 ### ABC analysis CSV
+
 Required columns:
+
 - `item_id`
 - `unit_cost`
 - `annual_demand`
